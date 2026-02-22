@@ -25,7 +25,7 @@ public class UserRequestDto {
     private String documentNumber;
 
     @NotBlank(message = "Celular obligatorio")
-    @Pattern(regexp = "^\\+?[0-9]{1,13}$", message = "Numero de celular invalido, debe ser máximo 13 caracteres incluido el '+'")
+    @Pattern(regexp = "^\\+?\\d{1,13}$", message = "Numero de celular invalido, debe ser máximo 13 caracteres incluido el '+'")
     private String celphone;
 
     @JsonDeserialize(using = LocalDateDeserializer.class)

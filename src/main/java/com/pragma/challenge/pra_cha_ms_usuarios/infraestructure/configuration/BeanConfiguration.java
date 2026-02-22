@@ -29,18 +29,6 @@ public class BeanConfiguration {
         return new UserUseCase(userPersistencePort);
     }
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
-
-//    @Bean
-//    public ObjectMapper objectMapper() {
-//        ObjectMapper mapper = new ObjectMapper();
-//        mapper.registerModule(new JavaTimeModule());
-//        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-//        return mapper;
-//    }
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer() {
         return builder -> {
