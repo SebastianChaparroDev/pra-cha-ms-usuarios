@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pragma.challenge</groupId>
-	<artifactId>pra-cha-ms-plazoleta</artifactId>
+	<artifactId>pra-cha-ms-usuarios</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>pra-cha-ms-plazoleta</name>
-	<description>Microservice Plazoleta de Comidas</description>
+	<name>pra-cha-ms-usuarios</name>
+	<description>Microservice Usuarios para la plazoleta de Comidas</description>
 	<url/>
 	<licenses>
 		<license/>

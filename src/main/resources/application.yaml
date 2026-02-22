@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: pra-cha-ms-plazoleta
+    name: pra-cha-ms-usuarios
 
   datasource:
     url: jdbc:mysql://localhost:3306/bd_usuarios?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
