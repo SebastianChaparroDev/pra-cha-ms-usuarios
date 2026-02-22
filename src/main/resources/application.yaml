@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: pra-cha-ms-plazoleta
+    name: pra-cha-ms-usuarios
 
   datasource:
     url: jdbc:mysql://localhost:3306/bd_usuarios?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
@@ -24,3 +24,9 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+jackson:
+  serialization:
+    write-dates-as-timestamps: false
+  deserialization:
+    fail-on-unknown-properties: false

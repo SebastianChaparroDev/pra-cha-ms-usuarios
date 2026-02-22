@@ -1,10 +1,10 @@
-package com.pragma.challenge.pra_cha_ms_plazoleta;
+package com.pragma.challenge.pra_cha_ms_usuarios;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PraChaMsPlazoletaApplicationTests {
+class PraChaMsUsuariosApplicationTests {
 
 	@Test
 	void contextLoads() {
