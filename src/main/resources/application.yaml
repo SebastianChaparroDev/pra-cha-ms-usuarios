@@ -24,3 +24,9 @@ springdoc:
     path: /v3/api-docs
   swagger-ui:
     path: /swagger-ui.html
+
+jackson:
+  serialization:
+    write-dates-as-timestamps: false
+  deserialization:
+    fail-on-unknown-properties: false
