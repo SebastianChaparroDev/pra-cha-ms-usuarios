@@ -3,6 +3,7 @@ package com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.exceptionhandle
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.DuplicateDocumentException;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.DuplicateEmailException;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.MinorUserException;
+import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -39,8 +40,13 @@ public class ControllerAdvisor {
     }
 
     @ExceptionHandler(DuplicateDocumentException.class)
-    public ResponseEntity<Map<String, Object>> haldeDuplicateDocument(DuplicateDocumentException exception){
+    public ResponseEntity<Map<String, Object>> handleDuplicateDocument(DuplicateDocumentException exception){
         return buildResponse(HttpStatus.CONFLICT, exception.getMessage(), null);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleUserNotFound(UserNotFoundException exception){
+        return buildResponse(HttpStatus.NOT_FOUND, exception.getMessage(), null);
     }
 
     private ResponseEntity<Map<String, Object>> buildResponse(HttpStatus status, String message, Object details) {

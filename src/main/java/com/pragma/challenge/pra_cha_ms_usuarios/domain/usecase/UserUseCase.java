@@ -4,6 +4,7 @@ import com.pragma.challenge.pra_cha_ms_usuarios.domain.api.IUserServicePort;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.DuplicateDocumentException;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.DuplicateEmailException;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.MinorUserException;
+import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.UserNotFoundException;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.model.Role;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.model.User;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.spi.IUserPersistencePort;
@@ -30,5 +31,11 @@ public class UserUseCase implements IUserServicePort {
 
         owner.setRole(Role.OWNER);
         userPersistencePort.saveUser(owner);
+    }
+
+    @Override
+    public User findById(Long id) {
+        return userPersistencePort.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("No existe usuario con el id" + id));
     }
 }

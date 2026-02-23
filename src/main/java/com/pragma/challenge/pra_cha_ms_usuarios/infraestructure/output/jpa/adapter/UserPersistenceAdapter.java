@@ -6,6 +6,8 @@ import com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.output.jpa.mappe
 import com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.output.jpa.repository.IUserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Optional;
+
 public class UserPersistenceAdapter implements IUserPersistencePort {
 
     private final IUserRepository userRepository;
@@ -25,8 +27,8 @@ public class UserPersistenceAdapter implements IUserPersistencePort {
     }
 
     @Override
-    public User findById(Long id) {
-        return null;
+    public Optional<User> findById(Long id) {
+       return userRepository.findById(id).map(userEntityMapper::toUser);
     }
 
     @Override
