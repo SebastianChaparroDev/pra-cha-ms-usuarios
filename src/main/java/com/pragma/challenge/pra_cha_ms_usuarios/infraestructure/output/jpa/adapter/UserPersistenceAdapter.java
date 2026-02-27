@@ -4,7 +4,6 @@ import com.pragma.challenge.pra_cha_ms_usuarios.domain.model.User;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.spi.IUserPersistencePort;
 import com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.output.jpa.mapper.IUserEntityMapper;
 import com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.output.jpa.repository.IUserRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
@@ -12,17 +11,14 @@ public class UserPersistenceAdapter implements IUserPersistencePort {
 
     private final IUserRepository userRepository;
     private final IUserEntityMapper userEntityMapper;
-    private final PasswordEncoder passwordEncoder;
 
-    public UserPersistenceAdapter(IUserRepository userRepository, IUserEntityMapper userEntityMapper, PasswordEncoder passwordEncoder) {
+    public UserPersistenceAdapter(IUserRepository userRepository, IUserEntityMapper userEntityMapper) {
         this.userRepository = userRepository;
         this.userEntityMapper = userEntityMapper;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public User saveUser(User user) {
-        user.setPass(passwordEncoder.encode(user.getPass()));
         return userEntityMapper.toUser(userRepository.save(userEntityMapper.toEntity(user)));
     }
 

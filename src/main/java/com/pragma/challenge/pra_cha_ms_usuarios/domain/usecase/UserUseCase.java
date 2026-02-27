@@ -1,35 +1,28 @@
 package com.pragma.challenge.pra_cha_ms_usuarios.domain.usecase;
 
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.api.IUserServicePort;
-import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.DuplicateDocumentException;
-import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.DuplicateEmailException;
-import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.MinorUserException;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.UserNotFoundException;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.model.Role;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.model.User;
+import com.pragma.challenge.pra_cha_ms_usuarios.domain.spi.IPassEncoderPort;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.spi.IUserPersistencePort;
+import com.pragma.challenge.pra_cha_ms_usuarios.domain.util.UserValidator;
 
 public class UserUseCase implements IUserServicePort {
 
     private final IUserPersistencePort userPersistencePort;
+    private final IPassEncoderPort passEncoderPort;
 
-    public UserUseCase(IUserPersistencePort userPersistencePort){
+    public UserUseCase(IUserPersistencePort userPersistencePort, IPassEncoderPort passEncoderPort){
         this.userPersistencePort = userPersistencePort;
+        this.passEncoderPort = passEncoderPort;
     }
 
     @Override
     public void createOwner(User owner) {
-        if (!owner.isOfLegalAge()){
-            throw new MinorUserException("El Propietario debe ser mayor de edad");
-        }
-        if (userPersistencePort.existsByDocument(owner.getDocumentNumber())){
-            throw new DuplicateDocumentException("El documento ya se encuentra registrado");
-        }
-        if (userPersistencePort.existsByEmail(owner.getEmail())){
-            throw new DuplicateEmailException("El correo ya se encuentra resgistrado");
-        }
-
+        UserValidator.validateRequieredFields(owner, userPersistencePort);
         owner.setRole(Role.OWNER);
+        owner.setPass(passEncoderPort.encode(owner.getPass()));
         userPersistencePort.saveUser(owner);
     }
 

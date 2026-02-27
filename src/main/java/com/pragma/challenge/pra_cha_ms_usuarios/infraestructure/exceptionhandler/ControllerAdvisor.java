@@ -1,9 +1,6 @@
 package com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.exceptionhandler;
 
-import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.DuplicateDocumentException;
-import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.DuplicateEmailException;
-import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.MinorUserException;
-import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.UserNotFoundException;
+import com.pragma.challenge.pra_cha_ms_usuarios.domain.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -47,6 +44,11 @@ public class ControllerAdvisor {
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleUserNotFound(UserNotFoundException exception){
         return buildResponse(HttpStatus.NOT_FOUND, exception.getMessage(), null);
+    }
+
+    @ExceptionHandler(InvalidFieldException.class)
+    public ResponseEntity<Map<String, Object>> handleInvalidfield(InvalidFieldException exception) {
+        return buildResponse(HttpStatus.BAD_REQUEST, exception.getMessage(), null);
     }
 
     private ResponseEntity<Map<String, Object>> buildResponse(HttpStatus status, String message, Object details) {

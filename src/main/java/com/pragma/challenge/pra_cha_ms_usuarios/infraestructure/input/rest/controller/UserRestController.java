@@ -1,8 +1,8 @@
 package com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.input.rest.controller;
 
 import com.pragma.challenge.pra_cha_ms_usuarios.application.handler.IUserHandler;
-import com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.input.rest.dto.request.UserRequestDto;
-import com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.input.rest.dto.response.UserResponseDto;
+import com.pragma.challenge.pra_cha_ms_usuarios.application.dto.request.UserRequestDto;
+import com.pragma.challenge.pra_cha_ms_usuarios.application.dto.response.UserResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

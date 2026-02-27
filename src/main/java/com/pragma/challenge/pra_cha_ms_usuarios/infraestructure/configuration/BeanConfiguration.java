@@ -1,8 +1,10 @@
 package com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.configuration;
 
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.api.IUserServicePort;
+import com.pragma.challenge.pra_cha_ms_usuarios.domain.spi.IPassEncoderPort;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.spi.IUserPersistencePort;
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.usecase.UserUseCase;
+import com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.output.encoder.PassWordEncoderPortAdapter;
 import com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.output.jpa.adapter.UserPersistenceAdapter;
 import com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.output.jpa.mapper.IUserEntityMapper;
 import com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.output.jpa.repository.IUserRepository;
@@ -19,14 +21,13 @@ public class BeanConfiguration {
     @Bean
     public IUserPersistencePort userPersistencePort(
             IUserRepository userRepository,
-            IUserEntityMapper userEntityMapper,
-            PasswordEncoder passwordEncoder) {
-        return new UserPersistenceAdapter(userRepository, userEntityMapper, passwordEncoder);
+            IUserEntityMapper userEntityMapper) {
+        return new UserPersistenceAdapter(userRepository, userEntityMapper);
     }
 
     @Bean
-    public IUserServicePort userServicePort(IUserPersistencePort userPersistencePort){
-        return new UserUseCase(userPersistencePort);
+    public IUserServicePort userServicePort(IUserPersistencePort userPersistencePort, IPassEncoderPort passEncoderPort){
+        return new UserUseCase(userPersistencePort, passEncoderPort);
     }
 
     @Bean
@@ -35,5 +36,10 @@ public class BeanConfiguration {
             builder.modules(new JavaTimeModule());
             builder.featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         };
+    }
+
+    @Bean
+    public IPassEncoderPort passEncoderPort(PasswordEncoder passwordEncoder) {
+        return new PassWordEncoderPortAdapter(passwordEncoder);
     }
 }

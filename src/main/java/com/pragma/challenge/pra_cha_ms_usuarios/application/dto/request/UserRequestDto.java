@@ -1,4 +1,4 @@
-package com.pragma.challenge.pra_cha_ms_usuarios.domain.model;
+package com.pragma.challenge.pra_cha_ms_usuarios.application.dto.request;
 
 import lombok.*;
 
@@ -8,16 +8,21 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+@Builder
+public class UserRequestDto {
 
-    private Long id;
     private String firstName;
+
     private String lastName;
+
     private String documentNumber;
+
     private String celphone;
+
     private LocalDate birthDay;
+
     private String email;
+
     private String pass;
-    private Role role;
 
 }

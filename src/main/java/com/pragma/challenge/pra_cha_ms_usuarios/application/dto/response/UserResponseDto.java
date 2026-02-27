@@ -1,4 +1,4 @@
-package com.pragma.challenge.pra_cha_ms_usuarios.infraestructure.input.rest.dto.response;
+package com.pragma.challenge.pra_cha_ms_usuarios.application.dto.response;
 
 import com.pragma.challenge.pra_cha_ms_usuarios.domain.model.Role;
 import lombok.*;
